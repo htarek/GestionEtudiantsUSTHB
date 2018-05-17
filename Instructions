@@ -1,0 +1,9 @@
+Créer un compte enseignant:
+
+Le compte enseignant étant unique, nous n'avons pas jugé nécessaire d'ajouter une fonctionnalité à l'application qui permettra sa création.
+Le compte devra être crée manuellement à travers la console Symfony:
+
+-dans la console symfony, executer la commande php bin/console fos:user:create (le Bundle FOSUserBundle doit être installé au préalable)
+-remplir les details demandés.
+-Une fois l'utilisateur crée, il faudra lui ajouter le role d'enseignant, pour ce faire, executer la commande fos:user:promote, et entrer ROLE_PROF quand vous serez prompté à entrer un role.
+(Attention, le compte enseignant devra nécessairement disposer de l'id 1 dans la base de données).
