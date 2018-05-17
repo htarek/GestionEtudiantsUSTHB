@@ -1,0 +1,192 @@
+html {
+    /* Adjust font size */
+    font-size                     	: 100%;
+    -webkit-text-size-adjust      	: 100%;
+    /* Font varient */
+    font-variant-ligatures        	: none;
+    -webkit-font-variant-ligatures	: none;
+    /* Smoothing */
+    text-rendering                	: optimizeLegibility;
+    -moz-osx-font-smoothing       	: grayscale;
+    font-smoothing                	: antialiased;
+    -webkit-font-smoothing        	: antialiased;
+    text-shadow                   	: rgba(0, 0, 0, .01) 0 0 1px;
+}
+
+body{
+    font-family	           : "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight	           : normal;
+    color      	           : white;
+    overflow-x 	           : none;
+    padding-top            : 100px;
+    -webkit-font-smoothing : antialiased;
+	height                 : 100%;
+	width                  : 100%;
+	background-color       : #3451B5;
+}
+
+ul{
+	list-style : none;
+}
+
+a{
+	color      : white;
+	transition : 0.3s ease-out;
+}
+
+a:hover, a:focus{
+	color           : #0077FF;
+	text-decoration : none;
+}
+
+button:active{
+	box-shadow : none !important;
+}
+
+button:focus{
+	outline : none !important;
+}
+
+.container-general{
+	height              : 100%;
+	width               : 100%;
+	position            : fixed;
+	left                : 0;
+	top                 : 0;
+	right               : 0;
+	background-image    : url(../images/curve.png);
+	background-repeat   : no-repeat; 
+	background-position : center center;
+	background-size     : cover;
+}
+
+.left-side{
+	height   : 100%;
+	position : relative;
+}
+
+h1{
+	margin-top  : 80px;
+	margin-left : 80px;
+	font-size   : 38px;
+	font-weight : 500;
+	max-width   : 400px;
+	line-height : 40px;
+}
+
+span{
+	font-size    : 16px;
+}
+
+.usthb-logo{
+	width        : 130px;
+	height       : auto;
+	display      : block;
+	position     : absolute;
+	bottom       : 20px;
+	right        : 100px;
+	left         : 0;
+	margin-left  : auto;
+	margin-right : auto;
+}
+
+.login-btn{
+	color: #C0C5D2;
+	display: inline-block;
+}
+
+.form-container{
+	position      : relative;
+	margin        : auto;
+	margin-top    : 100px;
+	width         : 350px;
+	overflow-x    : hidden; 
+	margin-bottom : 40px;
+}
+
+.login-btn{
+	display        : inline-block;
+	padding        : 8px 20px;
+	text-transform : uppercase;
+	transition     : 0.3s ease-out;
+}
+
+.login-btn.active{
+	color      : #0077FF;
+	box-shadow : none;
+}
+
+.login-btn:hover{
+	color : #0077FF;
+}
+
+#signup-btn{
+	float : right;
+	padding: 8px 30px;
+}
+
+.form-tabs-underline{
+	display : block;
+	position: absolute;
+	width   : 150px;
+	height  : 4px;
+	border-radius: 2px;
+	background-color: #0077FF;
+	transition: 0.3s ease-out;
+	left: 0px;
+}
+
+.form-tabs-underline.active{
+	left: 200px;
+}
+
+.forms-wrapper{
+	color: #2B2D32;
+	width: 700px;
+	transition: 0.3s ease-out;
+}
+
+.forms-wrapper.active{
+	transform: translateX(-350px);
+}
+
+.form-wrapper{
+	display : inline-block;
+	width   : 350px;
+	padding : 60px 20px 0px 20px;
+}
+
+.login-form{
+	float: left;
+}
+
+.inscription-form{
+	float: right;
+	max-height: 390px;
+	overflow-y: auto;
+}
+
+.copyright{
+	font-size: 12px;
+	text-align: center;
+	color: #9A9A9A;
+}
+
+@media screen and (max-width: 992px)
+{
+    .container-general{
+    	position: relative;
+		background-image    : none;
+	}
+
+	.right-side{
+		background-color  : white;
+		padding-bottom    : 160px;
+	}
+
+	.usthb-logo{
+		bottom       : -460px;
+		right        : 0;
+	}
+
+}

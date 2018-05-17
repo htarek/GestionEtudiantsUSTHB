@@ -1,0 +1,81 @@
+<div class="container-fluid etudiants-container">
+	<div class="header_wrap">
+		<div class="num_rows">
+
+			<div class="fancy-field">
+		        <select class="input"
+		                name="state" 
+		                id="EtudiantsMaxRows"
+		                required>
+		            <option value="10">10</option>
+					<option value="20">20</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+					<option value="5000">Tout montrer</option>
+		        </select>
+	        	<label for="EtudiantsMaxRows">Nombre de lignes</label>
+		    </div>
+
+		</div>
+		<div class="tb_search">
+			<div class="fancy-field" id="poste_groupe">
+		        <input class="input"
+		               id="etudiants_search_input_all"
+		               name="poste"
+		               type="text"
+		               onkeyup="FilterkeyWord_etudiants_table()"
+		               value=""
+		        >
+		        <label for="etudiants_search_input_all">Recherche</label>
+		    </div>
+		</div>
+	</div>
+	<table class="table table-class" id="etudiants">
+
+
+		<thead>
+			<tr>
+				<th>Photo</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th>Matricule</th>
+				<th>Groupe</th>
+				<th>Email</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for groupe in section.groupes %}
+				{% for etudiant in groupe.etudiants %}
+					<tr>
+						<td><span class="hidden">{{etudiant.user.nom}}</span>
+							{% if etudiant.user.image == NULL %}
+							<img src="{{asset('/assets/public/users/images/defaultuser.png')}}" class="table-image">
+						{% else %}
+							<img src="{{asset('/assets/public/users/images/') ~ etudiant.user.image}}" class="table-image">
+						{% endif %}
+						</td>
+						<td>{{etudiant.user.nom}}</td>
+						<td>{{etudiant.user.prenom}}</td>
+						<td>{{etudiant.matricule}}</td>
+						<td>{{etudiant.groupe.numero}}</td>
+						<td>{{etudiant.user.email}}</td>
+						<td><a href="{{ path('etudiant_show', {'id':etudiant.id})}}" class="btn table-action">Voir plus</a> 
+							{% if etudiant.user.enabled == false %}
+								<a href="" class="btn table-action table-valider">Valider</a> 
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			{% endfor %}
+		</tbody>
+	</table>
+	<div class='pagination-container'>
+		<nav>
+			<ul class="pagination">
+				<!--	Here the JS Function Will Add the Rows -->
+			</ul>
+		</nav>
+	</div>
+	<div class="rows_count">Showing 11 to 20 of 91 entries</div>
+</div>

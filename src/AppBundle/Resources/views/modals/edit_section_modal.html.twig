@@ -1,0 +1,99 @@
+<div id="edit_section_modal" class="modal fade creation-modal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Modifier la section</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="edit_section" action="{{path('edit_section',{'id' : section.id})}}" method="POST" autocomplete="off">
+                    <div class="fancy-field">
+                        <select class="input"
+                                id="new_section_specialite"
+                                name="specialite"
+                                required>
+                            <option value="" selected></option>
+                            {% for specialite in specialites %}
+                                <option value="{{specialite.id}}" {% if section.specialite==specialite %}selected{% endif %}>{{specialite.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="new_section_specialite">Spécialité</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new_section_year"
+                               name="annee"
+                               type="text"
+                               value="{{section.annee}}"
+                               required>
+                        <label for="new_section_year">Année universitaire</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new_section_name"
+                               name="name"
+                               type="text"
+                               value="{{section.name}}"
+                               required>
+                        <label for="new_section_name">Nom de la section</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new_section_nbr_groupes"
+                               name="groupes"
+                               type="number"
+                               value="{{section.groupes|length}}"
+                               required>
+                        <label for="new_section_nbr_groupes">Nombre de groupes</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new_section_email"
+                               name="email"
+                               type="email"
+                               value="{{section.email}}"
+                               required>
+                        <label for="new_section_email">Email de la section</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <select class="input"
+                                id="new_section_module"
+                                name="module"
+                                required>
+                            <option value="" selected></option>
+                            {% for module in modules %}
+                                <option value="{{module.id}}" {% if section.module==module %}selected{% endif %}>{{module.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="new_section_module">Module enseigné</label>
+                    </div>
+
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new_section_end_date"
+                               name="end_date"
+                               type="date"
+                               {% if section.dateFin!=NULL %}value="{{section.dateFin | date('Y-m-d') }}"{% endif %}>
+                        <label for="new_section_email">Date de supression automatique (facultatif)</label>
+                    </div>
+
+                    <div>
+                        <input type="submit" class="btn btn-submit" value="Valider la modification">
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

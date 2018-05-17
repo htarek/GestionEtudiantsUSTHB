@@ -1,0 +1,137 @@
+{% extends '@App/template/user.html.twig' %}
+{% block title %}Reglages{% endblock %}
+
+
+
+{% block body %}
+	{% if user != app.user %}
+		{% include '@App/user/access_denied.html.twig' %}
+	{% else %}
+
+
+        <div class="content-header">
+			<h3 class="page-title">Paramètres du compte</h3>
+
+			{% if is_granted('ROLE_PROF') %}
+				<button type="button" id="btn_add_section" class="btn btn-header" data-toggle="modal" data-target="#modules_modal"><i class="fa fa-list-ul"></i>Modules</button>
+
+				<button type="button" id="btn_add_section" class="btn btn-header" data-toggle="modal" data-target="#specialites_modal"><i class="fa fa-table"></i>Spécialités</button>
+			{% endif %}	
+
+		<div class="clearfix"></div>
+
+		{% if is_granted('ROLE_PROF') %}
+			{% include '@App/modals/modules_modal.html.twig' %}
+
+			{% include '@App/modals/specialites_modal.html.twig' %}
+		{% endif %}	
+
+
+		<div class="container-fluid cadre-container">
+			<div class="cadre">
+				{% if app.user.image == NULL %}
+                    <img src="{{asset('/assets/public/users/images/defaultuser.png')}}" class="settings-image">
+                {% else %}
+                    <img src="{{asset('/assets/public/users/images/') ~ app.user.image}}" class="settings-image">
+                {% endif %}
+
+				<form id="settings" action="{{path('edit_infos')}}" method="POST" autocomplete="off" enctype="multipart/form-data">
+
+					<div class="fancy-field">
+						<input class="input" 
+						id="usernamebis" 
+						name="_usernamebis" 
+						type="text"
+						value="{{user.email}}">
+						<label for="usernamebis">Email</label>
+					</div>
+
+					<div class="fancy-field">
+						<input class="input" 
+						id="nom" 
+						name="nom" 
+						type="text"
+						value="{{user.nom}}">
+						<label for="nom">Nom</label>
+					</div>
+
+					<div class="fancy-field">
+						<input class="input" 
+						id="prenom" 
+						name="prenom" 
+						type="text"
+						value="{{user.prenom}}">
+						<label for="prenom">Prénom</label>
+					</div>
+
+					<div class="fancy-field">
+						<input class="input"
+						id="old_password" 
+						name="old_password" 
+						type="password"
+						value="">
+						<label for="old_password">Ancien mot de passe</label>
+					</div>
+
+					<div class="fancy-field">
+						<input class="input"
+						id="password" 
+						name="password" 
+						type="password"
+						value="">
+						<label for="password">Nouveau mot de passe</label>
+					</div>
+
+					<div class="fancy-field">
+						<input class="input"
+						id="password_bis" 
+						name="password_bis" 
+						type="password"
+						value="">
+						<label for="password_bis">Retapez le mot de passe</label>
+					</div>
+
+					{% if user.roles[0]=='ROLE_ETUDIANT' %}
+						<div class="fancy-field">
+							<input class="input" 
+							id="matricule" 
+							name="matricule" 
+							type="text"
+							value="{{eleve.matricule}}">
+							<label for="matricule">Matricule</label>
+						</div>
+
+				{% endif %}
+
+				<div class="fancy-field">
+					<input class="input file-input"
+					id="new-user-photo"
+					name="photo"
+					type="file"
+					value="">
+					<label for="new-user-photo">Ajouter une photo</label>
+				</div>
+
+				<div>
+					<input type="submit" class="btn btn-submit" value="Valider la modification">
+					<div class="clearfix"></div>
+				</div>
+			</form>
+			</div>
+		</div>
+
+	{% endif %}
+
+{% endblock %}
+
+
+{% block stylesheets %}{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript">
+	        $('.navigation ul li:first-child').removeClass('active');
+	        $('.navigation ul li:nth-child(4)').addClass('active');
+
+	        
+	</script>
+{% endblock %}

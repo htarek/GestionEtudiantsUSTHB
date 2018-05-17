@@ -1,0 +1,286 @@
+html {
+    /* Adjust font size */
+    font-size                     	: 100%;
+    -webkit-text-size-adjust      	: 100%;
+    /* Font varient */
+    font-variant-ligatures        	: none;
+    -webkit-font-variant-ligatures	: none;
+    /* Smoothing */
+    text-rendering                	: optimizeLegibility;
+    -moz-osx-font-smoothing       	: grayscale;
+    font-smoothing                	: antialiased;
+    -webkit-font-smoothing        	: antialiased;
+    text-shadow                   	: rgba(0, 0, 0, .01) 0 0 1px;
+}
+
+body{
+    font-family	: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight	: normal;
+    color      	: #43425D;
+    overflow-x 	: none;
+    padding-top : 70px;
+    -webkit-font-smoothing : antialiased;
+}
+
+ul{
+	list-style: none;
+}
+
+a{
+	color      : #43425D;
+	transition : 0.3s ease-out;
+}
+
+a:hover, a:focus{
+	color: #0077FF;
+	text-decoration : none;
+}
+
+button:active{
+	box-shadow: none !important;
+}
+
+button:focus{
+	outline: none !important;
+}
+
+#header{
+	position   : fixed;
+	top        : 0px;
+	left       : 0px;
+	height 	   : 60px;
+	width      : 100%;
+	padding	   : 0px;
+	background : #fff;
+	border-bottom: 1px solid #EBEDF8;
+	z-index    : 100;
+}
+
+.header-logo{
+	margin-top  : 17px;
+	margin-left : 30px;
+}
+
+.header-logo{
+	height	: 36px;
+	width	: auto;
+	float   : left;
+}
+
+.header-button{
+	width         : 70px;
+	height        : 59px;
+	border-radius : 0px;
+	margin        : 0px 0px;
+	background    : #fff;
+	transition    : 0.4s ease-out;
+}
+
+.header-button.active{
+	background    : black;
+}
+
+.header-button i{
+	font-size : 15px;
+	color     : #C0C5D2;
+}
+
+.header-button.active i{
+	color     : #fff;
+}
+
+.header-button .fa-search:before{
+	transition    : 0.4s ease-out;
+}
+
+.header-button.active .fa-search:before{
+	content   : "\f00d";
+	transform : rotateX(90deg);
+}
+
+#header .user{
+	margin-top: 7px;
+	display : inline-block;
+	float   : right;
+	margin-right: 30px;
+	color: #0F0A30;
+}
+
+#header span{
+	float: left;
+	margin-top: 4px;
+}
+
+#header span>p{
+	font-weight: 700;
+	margin: 0px;
+	padding: 0px;
+	text-align: right;
+}
+
+#header span>p:nth-child(2){
+	font-size: 12px;
+	opacity: 0.6;
+}
+
+#header img{
+	display       : block;
+	float         : right;
+	height        : 45px;
+	width         : 45px;
+	border-radius : 50%;
+	object-fit    : cover;
+	margin-left   : 15px;
+}
+
+#page-content{
+	padding-left: 80px;
+	transition: 0.5s ease-out;
+}
+
+#page-content.active{
+	padding-left: 200px;
+}
+
+.navigation{
+	position   : fixed;
+	top        : 0px;
+	left       : 0px;
+	width      : 80px;
+	height     : 100vh;
+	overflow-y : auto;
+	overflow-x: hidden;
+	background : #fff;
+	border-right: 1px solid #EBEDF8;
+	z-index    : 80;
+	transition : 0.5s ease-out;
+	padding-top: 100px;
+}
+
+.navigation.active{
+	width: 200px;
+}
+
+.navigation .header-button i{
+	color: #fff
+}
+
+.navigation .menu-header{
+	width         : 100%;
+	height        : 80px;
+	border-bottom : 1px #707070 solid;
+	margin-bottom : 40px;
+}
+
+.navigation ul{
+	padding: 0px;
+	width: 200px;
+}
+
+.navigation ul li{
+	display: block;
+	font-size: 14px;
+	font-weight: 400;
+	margin-bottom: 5px;
+	text-transform: capitalize;
+	padding-left: 5px;
+}
+
+.navigation ul li.active{
+	padding-left: 0px;
+	border-left: 5px solid #0077FF;
+}
+
+.navigation ul li.active a{
+	color: #0077FF;
+}
+
+.navigation ul li a{
+	text-align: left;
+	display: block;
+	padding: 12px 0px;
+	padding-left: 30px;
+	width: 100%;
+	color: #C0C5D2;
+}
+
+.navigation.active ul li a{
+	padding-left: 40px;
+}
+
+.navigation ul li a:hover{
+	color: #0077FF;
+}
+
+.navigation ul li a i{
+	transition: 0.3s ease-out;
+	margin-right: 40px;
+	font-size: 20px;
+}
+
+.navigation.active ul li a i{
+	margin-right: 20px;
+}
+
+.logout_button{
+    float:right;
+    padding-top: 19px;
+    margin-right: 10px;
+}
+
+.logout_button i{
+    font-size: 18px;
+}
+
+
+
+
+
+@media screen and (max-width: 992px)
+{
+}
+
+
+@media screen and (max-width: 768px)
+{
+	#page-content, #page-content.active{
+		padding-left: 0px;
+	}
+
+	.navigation{
+		left       : -768px;
+		width      : 100%;	
+	}
+
+	.navigation.active{
+		width: 100%;
+		left: 0px;
+	}
+
+	.navigation ul{
+		width: 100%;
+	}
+
+	.navigation ul li a{
+		padding: 20px 0px;
+		padding-left: 30px;
+		font-size: 20px;
+	}
+
+	.navigation ul li a i{
+		font-size: 30px;
+	}
+
+	.navigation.active ul li a{
+		padding-left: 60px;
+	}
+
+	.navigation ul li.active{
+		padding-left: 0px;
+		border-left-width: 10px;
+	}
+
+    
+
+}
+    

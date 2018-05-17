@@ -1,0 +1,265 @@
+{% if not is_granted('ROLE_ETUDIANT') %}
+	{% include '@App/user/access_denied.html.twig' %}
+{% elseif eleve.user.enabled == false %}
+	{% include '@App/user/attente_validation.html.twig' %}
+{% else %}
+
+	<div class="content-header">
+		<h3 class="page-title">Ma section</h3>
+	</div>
+
+	<div class="container-fluid cadre-container">
+		{% if eleve.groupe != null %}{% if eleve.groupe.section != null %}
+			<div class="cadre">
+				<h5 class="specialite-section">{{eleve.groupe.section.specialite.name}}</h5>
+				<p class="details-section">{{eleve.groupe.section.annee}}<br />Section {{eleve.groupe.section.name}}<br /><br />{{eleve.groupe.section.email}}</p>
+
+				<div class="bar"></div>
+
+				<span class="module"><b>Module:</b> {{eleve.groupe.section.module.name}}</span>
+				{% if eleve.groupe.section.dateFin != NULL %}
+					<span class="endDate"><b>Date de fin:</b> {{eleve.groupe.section.dateFin | date('d-m-Y') }}</span>
+				{% endif %}
+
+
+				<div class="bar"></div>
+
+
+				<h4 class="cadre-title">Tests et Examens</h4>
+
+				<div class="clearfix"></div>
+
+				<div class="container-fluid examens-container">
+					<table class="table table-class" id="examens">
+						<thead>
+							<tr>
+								<th>Examen</th>
+								<th>Note sur</th>
+								<th>Date</th>
+								<th>Description</th>
+								<th>Etat</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% if eleve.groupe != null %}{% if eleve.groupe.section != null %}
+								{% for examen in eleve.groupe.section.examens %}
+									<tr>
+										<td>{{examen.name}}</td>
+										<td>{{examen.note}}</td>
+										<td>{% if examen.dateExamen == NULL %}
+												-
+											{% else %}
+												{{examen.dateExamen | date('d/m/y') }}
+											{% endif %}
+										</td>
+										<td>{{examen.description}}</td>
+										<td>{% if examen.etat %}
+												<button class="btn table-action examen-state done">Fait</button>
+											{% else %}
+												<button class="btn table-action examen-state wait">En attente</button>
+											{% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+							{% endif %}{% endif %}
+						</tbody>
+					</table>
+
+				</div>
+
+				<h4 class="cadre-title">Étudiants</h4>
+				<button type="button" id="tab_discussion" class="btn btn-cadre"><i class="fa fa-comments"></i>Voir la discussion</button>
+				<button type="button" id="tab_all" class="btn btn-cadre"><i class="fa fa-list"></i>Voir tous les élèves</button>
+				<button type="button" id="tab_groups" class="btn btn-cadre active"><i class="fa fa-th-list"></i>Voir par groupes</button>
+
+				<div class="clearfix"></div>
+
+				<div id="groups_tab_content" class="tab-content active">
+					<div class="onglets">
+						{% for groupe in eleve.groupe.section.groupes %}
+						<button type="button" class="btn section-onglet {% if groupe.numero == 1 %}active{% endif %}" id="btn_groupe_{{groupe.numero}}">Groupe {{groupe.numero}}</button>
+						{% endfor %}
+					</div>
+
+					<div class="container-fluid groupes-container">
+						{% for groupe in eleve.groupe.section.groupes %}
+							<div class="groupe-wrapper {% if groupe.numero == 1 %}active{% endif %}" id="groupe_{{groupe.numero}}">
+								<table class="table table-class" id="table_groupe_{{groupe.numero}}">
+									<thead>
+										<tr>
+											<th>Photo</th>
+											<th>Nom</th>
+											<th>Prénom</th>
+											<th>Matricule</th>
+											<th>Email</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for etudiant in groupe.etudiants %}
+											<tr>
+												<td><span class="hidden">{{etudiant.user.nom}}</span>
+													{% if etudiant.user.image == NULL %}
+														<img src="{{asset('/assets/public/users/images/defaultuser.png')}}" class="table-image">
+													{% else %}
+														<img src="{{asset('/assets/public/users/images/') ~ etudiant.user.image}}" class="table-image">
+													{% endif %}
+												</td>
+												<td>{{etudiant.user.nom}}</td>
+												<td>{{etudiant.user.prenom}}</td>
+												<td>{{etudiant.matricule}}</td>
+												<td>{{etudiant.user.email}}</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+
+				<div id="all_tab_content" class="tab-content">
+					<div class="container-fluid etudiants-container">
+						<div class="header_wrap">
+							<div class="num_rows">
+
+								<div class="fancy-field">
+							        <select class="input"
+							                name="state" 
+							                id="EtudiantsMaxRows"
+							                required>
+							            <option value="10">10</option>
+										<option value="20">20</option>
+										<option value="50">50</option>
+										<option value="100">100</option>
+										<option value="5000">Tout montrer</option>
+							        </select>
+						        	<label for="EtudiantsMaxRows">Nombre de lignes</label>
+							    </div>
+
+							</div>
+							<div class="tb_search">
+								<div class="fancy-field" id="poste_groupe">
+							        <input class="input"
+							               id="etudiants_search_input_all"
+							               name="poste"
+							               type="text"
+							               onkeyup="FilterkeyWord_etudiants_table()"
+							               value=""
+							        >
+							        <label for="etudiants_search_input_all">Recherche</label>
+							    </div>
+							</div>
+						</div>
+						<table class="table table-class" id="etudiants">
+
+
+							<thead>
+								<tr>
+									<th>Photo</th>
+									<th>Nom</th>
+									<th>Prénom</th>
+									<th>Matricule</th>
+									<th>Groupe</th>
+									<th>Email</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for groupe in eleve.groupe.section.groupes %}
+									{% for etudiant in groupe.etudiants %}
+										<tr>
+											<td><span class="hidden">{{etudiant.user.nom}}</span>
+												{% if etudiant.user.image == NULL %}
+												<img src="{{asset('/assets/public/users/images/defaultuser.png')}}" class="table-image">
+											{% else %}
+												<img src="{{asset('/assets/public/users/images/') ~ etudiant.user.image}}" class="table-image">
+											{% endif %}
+											</td>
+											<td>{{etudiant.user.nom}}</td>
+											<td>{{etudiant.user.prenom}}</td>
+											<td>{{etudiant.matricule}}</td>
+											<td>{{etudiant.groupe.numero}}</td>
+											<td>{{etudiant.user.email}}</td>
+										</tr>
+									{% endfor %}
+								{% endfor %}
+							</tbody>
+						</table>
+						<div class='pagination-container'>
+							<nav>
+								<ul class="pagination">
+									<!--	Here the JS Function Will Add the Rows -->
+								</ul>
+							</nav>
+						</div>
+						<div class="rows_count">Showing 11 to 20 of 91 entries</div>
+					</div>
+				</div>
+
+				<div id="discussion_tab_content" class="tab-content">
+					<div class="object comments">
+					    <div class="comments-container">
+					        {% if eleve.groupe.section.messages is empty %}
+					            <p class="no-message-found" style="text-align:center">Envoyez un message</p>
+					        {% endif %}
+					        {% for message in eleve.groupe.section.messages %}
+					            <div class="comment {% if message.etudiant==eleve %}us{% else %}them{% endif %}">
+					                <p class="infos-sender">
+					                    {% if message.etudiant == NULL %}
+					                        {{ prof.nom ~ ' ' ~ prof.prenom }}
+					                    {% else %}
+					                        {{ message.etudiant.user.nom ~ ' ' ~ message.etudiant.user.prenom }}
+					                    {% endif %}
+					                    ,
+					                    {% if message.createdAt|date('d/m/y')==date()|date('d/m/y') %}
+					                        {{ message.createdAt | date('H:i:s', false) }}
+					                    {% else %}
+					                        {{ message.createdAt | date('d/m/y, H:i:s', false) }}
+					                    {% endif %}
+					                </p>
+					                <div class="comment-content">
+					                    {% if message.etudiant == NULL %}
+					                        {% if prof.image == NULL %}
+					                            <img src="{{ asset('assets/public/users/images/defaultuser.png')}}" class="comment-user-photo">
+					                        {% else %}
+					                            <img src="{{asset('/assets/public/users/images/') ~ prof.image}}" class="comment-user-photo">
+					                        {% endif %}
+					                    {% else %}
+					                        {% if message.etudiant.user.image == NULL %}
+					                            <img src="{{ asset('assets/public/users/images/defaultuser.png')}}" class="comment-user-photo">
+					                        {% else %}
+					                            <img src="{{asset('/assets/public/users/images/') ~ message.etudiant.user.image}}" class="comment-user-photo">
+					                        {% endif %}
+					                    {% endif %}
+
+					                    <span>{{ message.content }}</span>
+					                </div>
+					            </div>
+					            <div class="clearfix"></div>
+					        {% endfor %}
+					    </div>
+					    <form id="send_comment" action="{{path('section_add_message',{'id':eleve.groupe.section.id})}}" method="POST" autocomplete="off">
+					        <div class="fancy-field">
+					                <textarea class="input"
+					                          id="content"
+					                          name="content"
+					                          type="text"
+					                          value=""></textarea>
+					            <label for="content">Votre message</label>
+					        </div>
+
+					        <div>
+					            <button type="submit" class="btn btn-send-comment"><i class="fa fa-reply"></i></button>
+					        </div>
+					    </form>
+					</div>
+				</div>
+			</div>
+			{% else %}
+				<p class="access-denied">Vous n'êtes affecté à aucune section, contactez votre professeur pour plus de details</p>
+			{% endif %}
+		{% else %}
+			<p class="access-denied">Vous n'êtes affecté à aucune section, contactez votre professeur pour plus de details</p>
+		{% endif %}
+	</div>
+
+{% endif %}

@@ -1,0 +1,117 @@
+{% extends '@App/template/user.html.twig' %}
+{% block title %}{{ etudiant.user.nom ~ ' ' ~ etudiant.user.prenom }}{% endblock %}
+
+
+
+{% block body %}
+	{% if not is_granted('ROLE_PROF') %}
+		{% include '@App/user/access_denied.html.twig' %}
+	{% else %}
+
+
+        <div class="content-header">
+			<h3 class="page-title">Details d'élève</h3>
+
+			<a href="{{path('supp_etudiant',{'id': etudiant.id})}}}" id="btn_add_section" class="btn btn-header"><i class="fa fa-trash"></i>Supprimer</a>
+			<button type="button" id="btn_edit_etudiant" class="btn btn-header" data-toggle="modal" data-target="#edit_etudiant_modal"><i class="fa fa-edit"></i>Modifier</button>
+			<button type="button" id="btn_noter_etudiant" class="btn btn-header" data-toggle="modal" data-target="#noter_etudiant_modal"><i class="fa fa-edit"></i>Noter</button>
+			
+			{% if etudiant.user.enabled == false %}
+				<a href="#" id="btn_valider_etudiant" class="btn btn-header btn-valider"><i class="fa fa-check"></i>Valider</a>
+			{% endif %}
+
+			{% include '@App/modals/edit_etudiant_modal.html.twig' %}
+			{% include '@App/modals/noter_etudiant_modal.html.twig' %}
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="container-fluid cadre-container">
+			<div class="cadre">
+				{% if etudiant.user.image == NULL %}
+					<img src="{{asset('/assets/public/users/images/defaultuser.png')}}" class="student-photo">
+				{% else %}
+					<img src="{{asset('/assets/public/users/images/') ~ etudiant.user.image}}" class="student-photo">
+				{% endif %}
+				<div class="pull-left">
+					<h5 class="specialite-section">{{etudiant.user.nom ~ ' ' ~ etudiant.user.prenom }}</h5>
+					<p class="details-section">{{etudiant.matricule}}</p>
+				</div>
+
+				<div class="pseudo-table-infos">
+					<div class="row">
+						<div class="col-xs-6">
+							<p class="pseudo-table-infos-title">Section</p>
+							<ul class="list-unstyled">
+								<li><b>Spécialité:</b> {% if etudiant.groupe != null %}{% if etudiant.groupe.section != null %}{{etudiant.groupe.section.specialite.name}}{% endif %}{% else %} - {% endif %}</li>
+								<li><b>Section:</b> {% if etudiant.groupe != null %}{% if etudiant.groupe.section != null %}{{etudiant.groupe.section.name}}{% endif %}{% else %} - {% endif %}</li>
+								<li><b>Groupe:</b> {% if etudiant.groupe != null %}{% if etudiant.groupe.section != null %}{{etudiant.groupe.numero}}{% endif %}{% else %} - {% endif %}</li>
+							</ul>
+						</div>
+
+						<div class="col-xs-6">
+							<p class="pseudo-table-infos-title">Informations</p>
+							<ul class="list-unstyled">
+								<li><b>email:</b> {{etudiant.user.email}}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="clearfix"></div>
+
+				<div class="notes-container">
+					{% if etudiant.groupe != null %}{% if etudiant.groupe.section != null %}
+						{% for examen in etudiant.groupe.section.examens %}
+							<div class="note-object">
+								<p class="note-title">{{examen.name}} / {{examen.note}}</p>
+								{% set found = false %}
+									{% for note in etudiant.notes %}
+										{% if note.examen==examen and note.note !=null %}
+											{% set found = true %}
+											<span>{{note.note}}</span>
+										{% endif %}
+									{% endfor %}
+								{% if found == false %}
+									<span>-</span>
+								{% endif %}
+							</div>
+						{% endfor %}
+
+					<div class="note-object">
+						<p class="note-title">Moyenne</p>
+						<span>
+							{% if etudiant.moyenne == -1 %}
+								-
+							{% else %}
+								{{etudiant.moyenne}}
+							{% endif %}
+						</span>
+					</div>
+					{% endif %}{% endif %}
+				</div>
+
+				<div class="clearfix"></div>
+
+				<h4 class="cadre-title">Messagerie</h4>
+
+				{% include '@App/etudiant/discussion_prive.html.twig' %}
+			</div>
+		</div>
+
+	{% endif %}
+
+{% endblock %}
+
+
+{% block stylesheets %}{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript">
+	        $('.navigation ul li:first-child').removeClass('active');
+	        $('.navigation ul li:nth-child(3)').addClass('active');
+	        {% if erreurajout == true %}
+            $('#btn_add_user').click();</script>>
+            {% endif %}
+	</script>
+{% endblock %}

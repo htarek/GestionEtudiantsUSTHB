@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+
+
+
+
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+          <link rel="stylesheet" type="text/css" href="{{asset('assets/public/css/forms.css')}}">
+          <link rel="stylesheet" type="text/css" href="{{asset('assets/public/css/login.css')}}">
+
+
+
+
+
+
+        <title>Gestion Étudiants</title>
+        <link rel="icon" href="{{asset('assets/public/images/favicon.png')}}">
+    </head>
+
+    <body>
+        <div class="container-general">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="left-side col-xs-12 col-sm-12 col-md-6">
+                        <h1><span>BIENVENUE À<br/></span> LA PLATEFORME DE GESTION ÉTUDIANTS</h1>
+                    </div>
+                    <div class="right-side col-xs-12 col-sm-12 col-md-6">
+                        <div class="form-container">
+                            <div class="form-tabs">
+
+                                <span id="login-btn" class="btn login-btn active">Mot de passe oublié</span>
+
+                                <span id="signup-btn" class="btn login-btn"></span>
+                            </div>
+                            <div class="form-tabs-underline" style="width: 190px;"></div>
+                            <div class="forms-wrapper">
+                                <div class="form-wrapper login-form active">
+                                    <p style="opacity: 0.6; margin-bottom: 20px; font-style: italic;">ENTREZ VOTRE NOUVEAU MOT DE PASSE.</p>
+                                     {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+                                    {{ form_widget(form) }}
+                                        <div>
+                                             <input type="submit" class="btn submit_btn" value="Envoyer">
+                                        </div>
+
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+
+                           
+                            <p class="copyright">Projet par HIOUANI Tarek et BOUHADJAR Mohamed El Amine.</p>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        
+        
+<img class='usthb-logo' src="{{asset('assets/public/images/usthb.png')}}" />
+
+        <footer id="footer">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+              <script src="{{asset('assets/public/js/login.js')}}"></script>
+                                    
+              
+
+
+        </footer>
+    </body>
+</html>

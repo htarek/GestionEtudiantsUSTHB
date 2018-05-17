@@ -1,0 +1,7 @@
+{%- block form_row -%}
+    <div class="fancy-field">
+        {{- form_errors(form) -}}
+        {{- form_widget(form, {'attr':{'class':'input'}}) -}}
+        {{- form_label(form) -}}
+    </div>
+{%- endblock form_row -%}

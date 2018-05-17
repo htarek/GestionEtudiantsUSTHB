@@ -1,0 +1,162 @@
+{% extends '@App/template/user.html.twig' %}
+{% block title %}Élèves{% endblock %}
+
+
+
+{% block body %}
+	{% if not is_granted('ROLE_PROF') %}
+		{% include '@App/user/access_denied.html.twig' %}
+	{% else %}
+
+
+        <div class="content-header">
+			<h3 class="page-title">Gestion des élèves</h3>
+
+			<button type="button" id="btn_add_user" class="btn btn-header" data-toggle="modal" data-target="#new_etudiant_modal"><i class="fa fa-plus"></i>Ajouter</button>
+
+			{% include '@App/modals/new_etudiant_modal.html.twig' %}
+		</div>
+
+		<div class="container-fluid section-container">
+			<div class="header_wrap">
+				<div class="num_rows">
+
+					<div class="fancy-field">
+				        <select class="input"
+				                name="state" 
+				                id="EtudiantsMaxRows"
+				                required>
+				            <option value="10">10</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+							<option value="5000">Tout montrer</option>
+				        </select>
+			        	<label for="EtudiantsMaxRows">Nombre de lignes</label>
+				    </div>
+
+				</div>
+				<div class="tb_search">
+					<div class="fancy-field" id="poste_groupe">
+				        <input class="input"
+				               id="etudiants_search_input_all"
+				               name="poste"
+				               type="text"
+				               onkeyup="FilterkeyWord_etudiants_table()"
+				               value=""
+				        >
+				        <label for="etudiants_search_input_all">Recherche</label>
+				    </div>
+				</div>
+			</div>
+			<table class="table table-class table-etudiants" id="etudiants">
+
+
+				<thead>
+					<tr>
+						<th>Photo</th>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>Matricule</th>
+						<th>Email</th>
+						<th>Section</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for etudiant in etudiants %}
+						<tr>
+							<td><span class="hidden">{{etudiant.user.nom}}</span>
+								{% if etudiant.user.image == NULL %}
+									<img src="{{asset('/assets/public/users/images/defaultuser.png')}}" class="table-image">
+								{% else %}
+									<img src="{{asset('/assets/public/users/images/') ~ etudiant.user.image}}" class="table-image">
+								{% endif %}
+							</td>
+							<td>{{etudiant.user.nom}}</td>
+							<td>{{etudiant.user.prenom}}</td>
+							<td>{{etudiant.matricule}}</td>
+							<td>{{etudiant.user.email}}</td>
+							
+							<td {% if etudiant.user.enabled == false %}style="color: red"{% endif %} >
+								{% if etudiant.groupe != null %}{% if etudiant.groupe.section != null %}
+									{{etudiant.groupe.section.annee ~ ' ' ~ etudiant.groupe.section.specialite.name ~ ' ' ~ etudiant.groupe.section.name ~ ' Groupe ' ~ etudiant.groupe.numero}}
+								{% else %}
+									-
+								{% endif %}{% endif %}
+							</td>
+							
+							<td><a href="{{ path('etudiant_show', {'id':etudiant.id})}}" class="btn table-action">Voir plus</a> 
+								{% if etudiant.groupe != null %}{% if etudiant.groupe.section != null %}
+									{% if etudiant.user.enabled == false %}
+										<a href="{{path('enable',{'id':etudiant.user.id})}}" class="btn table-action table-valider">Valider</a> 
+									{% endif %}
+								{% endif %}{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class='pagination-container'>
+				<nav>
+					<ul class="pagination">
+						<!--	Here the JS Function Will Add the Rows -->
+					</ul>
+				</nav>
+			</div>
+			<div class="rows_count">Showing 11 to 20 of 91 entries</div>
+
+		</div>
+	{% endif %}
+
+{% endblock %}
+
+
+{% block stylesheets %}{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript">
+	        $('.navigation ul li:first-child').removeClass('active');
+	        $('.navigation ul li:nth-child(3)').addClass('active');
+
+			sortTable("etudiants");
+
+			function sortTable(s) {
+			  var table, rows, switching, i, x, y, shouldSwitch;
+			  table = document.getElementById(s);
+			  switching = true;
+			  /* Make a loop that will continue until
+			  no switching has been done: */
+			  while (switching) {
+			    // Start by saying: no switching is done:
+			    switching = false;
+			    rows = table.getElementsByTagName("TR");
+			    /* Loop through all table rows (except the
+			    first, which contains table headers): */
+			    for (i = 1; i < (rows.length - 1); i++) {
+			      // Start by saying there should be no switching:
+			      shouldSwitch = false;
+			      /* Get the two elements you want to compare,
+			      one from current row and one from the next: */
+			      x = rows[i].getElementsByTagName("TD")[0];
+			      y = rows[i + 1].getElementsByTagName("TD")[0];
+			      // Check if the two rows should switch place:
+			      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+			        // I so, mark as a switch and break the loop:
+			        shouldSwitch= true;
+			        break;
+			      }
+			    }
+			    if (shouldSwitch) {
+			      /* If a switch has been marked, make the switch
+			      and mark that a switch has been done: */
+			      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			      switching = true;
+			    }
+			  }
+			}
+			{% if erreurajout == true %}
+            $('#btn_add_user').click();</script>>
+            {% endif %}
+	</script>
+{% endblock %}

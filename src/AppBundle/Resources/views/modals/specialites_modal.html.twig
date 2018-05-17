@@ -1,0 +1,45 @@
+<div id="specialites_modal" class="modal fade creation-modal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Ajouter une spécialité</h4>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-class" id="specialites" style="max-width: 500px; margin: auto">
+                    <thead>
+                        <tr>
+                            <th>Spécialité</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for specialite in specialites %}
+                            <tr>
+                                <td>{{specialite.name}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <form id="add_specialite" action="{{path('spe_add')}}" method="POST" autocomplete="off">
+                    <div class="fancy-field">
+                            <textarea class="input"
+                                      id="specialiteName"
+                                      name="name"
+                                      type="text"
+                                      value=""></textarea>
+                        <label for="specialiteName">Nom de la spécialité</label>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-send-comment"><i class="fa fa-plus"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

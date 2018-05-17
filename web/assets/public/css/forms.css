@@ -1,0 +1,232 @@
+.submit_btn{
+    display: inline-block;
+    width: 100%;
+    background-color: #0077FF;
+    color: white;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-top: 40px;
+    margin-bottom: 12px;
+    padding: 10px 0px;
+    border-radius: 20px;
+    transition: 0.3s;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+}
+
+.submit_btn:hover{
+    color: white;
+}
+
+
+
+/*************************FORMS********************************/
+/*Form*/
+ 
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #f7f9fb inset !important; }
+
+textarea{
+    resize: none;
+    overflow: hidden;
+}
+
+.input {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 50px;
+  padding: 15px 0;
+  color: #6D7784;
+  font-size: 14px;
+  line-height: 19px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: transparent;
+  outline: none;
+  transition: 0.3s; }
+  .input:focus {
+    border-bottom: 2px solid #0077FF; }
+
+.input.error {
+  border-color: #0077FF; }
+
+  /* Fancy field */
+.fancy-field {
+  position: relative;
+  padding-top: 20px; 
+  margin-bottom: 10px;}
+  .fancy-field label {
+    position: absolute;
+    margin-bottom: 1px;
+    top: 35px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    color: #BEBEBE;
+    -webkit-transition: all ease 0.2s;
+    -moz-transition: all ease 0.2s;
+    transition: all ease 0.2s; }
+  .fancy-field .input:focus + label,
+  .fancy-field .input.hasvalue + label {
+    top: 0;
+    color: #0077FF;
+    font-size: 12px; }
+
+    .fancy-field select {
+    background-color: transparent;
+    width: 100%;
+    padding: 4px 0;
+    font-size: 16px;
+    -webkit-appearance: none;
+    border-bottom: 1px solid rgba(0,0,0, 0.12);
+}
+
+/* Remove focus */
+.fancy-field select:focus {
+    outline: none !important;
+}
+
+.fancy-field select option{
+    padding: 4px 2px;
+}
+
+input::-webkit-datetime-edit{ color: transparent; }
+
+input.hasvalue::-webkit-datetime-edit{ color: #000; }
+
+/* Include this to make it visible when input is clicked */
+input:focus::-webkit-datetime-edit{ color: #000; }
+
+
+/**************CHECHBOXES****************/
+/* Checkbox */
+.checkbox { transform: translateY(16px);
+  background: transparent; }
+
+.checkbox + div {
+  position: relative;
+  padding-left: 24px;
+  color: #C0C5D2;
+  font-size: 12px;
+  line-height: 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all ease 0.2s;
+  -moz-transition: all ease 0.2s;
+  transition: all ease 0.2s; 
+    font-weight: 400;   
+}
+  .checkbox + div .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 20px;
+    line-height: 1;
+    -webkit-transition: all ease 0.2s;
+    -moz-transition: all ease 0.2s;
+    transition: all ease 0.2s; }
+
+.checkbox:checked + div {
+  color: #0077FF; }
+
+.checkbox + div .icon.unchecked {
+  opacity: 1;
+  visibility: visible; }
+
+.checkbox + div .icon.checked {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: scale(0.7);
+  -moz-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  -o-transform: scale(0.7);
+  transform: scale(0.7); }
+
+.checkbox:checked + div .icon.checked {
+  color: #0077FF;
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1); }
+
+
+
+.forgot{
+    color: #C0C5D2;
+    font-size: 12px;
+    transform: translateY(18px);
+}
+
+.fancy-field .input.file-input + label {
+    top: 0;
+    font-size: 12px; }
+
+.fancy-field .input.file-input:focus + label {
+    color: #0077FF; }
+
+
+.fancy-field .slidecontainer {
+    width: 100%;
+}
+
+.fancy-field .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    margin-bottom: 10px;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.fancy-field .slider:hover {
+    opacity: 1;
+}
+
+.fancy-field .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #0077FF;
+    cursor: pointer;
+}
+
+.fancy-field .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+
+.btn-submit{
+    background-color: #0178FF;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 8px 15px;
+    margin: 20px 0px 30px 0px;
+    float: right;
+    color: white;
+    transition: 0.3s ease-out;
+}
+
+.btn-submit:hover{
+    background-color: #00FF;
+    color: #fff;
+}

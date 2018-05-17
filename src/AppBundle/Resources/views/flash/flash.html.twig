@@ -1,0 +1,36 @@
+{% for message in app.flashes('error') %}
+    <section>
+        <div class="notification error">
+            <span class="title">!&nbsp;&nbsp;&nbsp;&nbsp;Erreur</span> 
+            {{ message }}
+            <span class="close-notification">X</span>
+        </div>
+    </section>
+{% endfor %}
+{% for message in app.flashes('success') %}
+    <section>
+        <div class="notification success">
+            <span class="title">!&nbsp;&nbsp;&nbsp;&nbsp;Success</span> 
+            {{ message }}
+            <span class="close-notification">X</span>
+        </div>
+    </section>
+{% endfor %}
+{% for message in app.flashes('warning') %}
+    <section>
+        <div class="notification warning">
+            <span class="title">!&nbsp;&nbsp;&nbsp;&nbsp;Warning</span> 
+            {{ message }}
+            <span class="close-notification">X</span>
+        </div>
+    </section>
+{% endfor %}
+{% for message in app.flashes('normal') %}
+    <section>
+        <div class="notification normal">
+            <span class="title">!&nbsp;&nbsp;&nbsp;&nbsp;Info</span> 
+            {{ message }}
+            <span class="close-notification">X</span>
+        </div>
+    </section>
+{% endfor %}

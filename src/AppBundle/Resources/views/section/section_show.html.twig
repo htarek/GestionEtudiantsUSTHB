@@ -1,0 +1,207 @@
+{% extends '@App/template/user.html.twig' %}
+{% block title %}Section {{section.name}}{% endblock %}
+
+
+
+{% block body %}
+	{% if not is_granted('ROLE_PROF') %}
+		{% include '@App/user/access_denied.html.twig' %}
+	{% else %}
+
+
+        <div class="content-header">
+			<h3 class="page-title">Details de section</h3>
+
+			<a href="{{path('supp_section',{'id' : section.id})}}" id="btn_add_section" class="btn btn-header" ><i class="fa fa-trash"></i>Supprimer</a>
+			<button type="button" id="btn_add_section" class="btn btn-header" data-toggle="modal" data-target="#edit_section_modal"><i class="fa fa-edit"></i>Modifier</button>
+			<button type="button" id="btn_add_section" class="btn btn-header" data-toggle="modal" data-target="#new_exam_modal"><i class="fa fa-plus"></i>Ajouter examen</button>
+			<button type="button" id="btn_add_section" class="btn btn-header" data-toggle="modal" data-target="#new_eleve_modal"><i class="fa fa-user-plus"></i>Ajouter élève</button>
+
+			{% include '@App/modals/add_eleve_modal.html.twig' %}
+			{% include '@App/modals/add_examen_modal.html.twig' %}
+			{% include '@App/modals/edit_section_modal.html.twig' %}
+			<div class="clearfix"></div>
+		</div>
+
+		<div class="container-fluid cadre-container">
+			<div class="cadre">
+				<h5 class="specialite-section">{{section.specialite.name}}</h5>
+				<p class="details-section">{{section.annee}}<br />Section {{section.name}}<br /><br />{{section.email}}</p>
+
+				<div class="bar"></div>
+
+				<span class="module"><b>Module:</b> {{section.module.name}}</span>
+				{% if section.dateFin != NULL %}
+					<span class="endDate"><b>Date de fin:</b> {{section.dateFin | date('d-m-Y') }}</span>
+				{% endif %}
+
+				<div class="bar"></div>
+
+
+				<h4 class="cadre-title">Tests et Examens</h4>
+				<button type="button" id="btn_add_section" class="btn btn-cadre" data-toggle="modal" data-target="#edit_moyenne_modal"><i class="fa fa-edit"></i>Définir moyenne</button>
+
+				{% include '@App/modals/edit_moyenne_modal.html.twig' %}
+
+				<div class="clearfix"></div>
+
+				<div class="container-fluid examens-container">
+					<table class="table table-class" id="examens">
+						<thead>
+							<tr>
+								<th>Examen</th>
+								<th>Note sur</th>
+								<th>Date</th>
+								<th>Description</th>
+								<th>Etat</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for examen in section.examens %}
+								<tr>
+									<td>{{examen.name}}</td>
+									<td>{{examen.note}}</td>
+									<td>{% if examen.dateExamen == NULL %}
+											-
+										{% else %}
+											{{examen.dateExamen | date('d/m/y') }}
+										{% endif %}
+									</td>
+									<td>{{examen.description}}</td>
+									<td>{% if examen.etat %}
+											<a href="{{path('exam_state',{'id': examen.id })}}"  class="btn table-action examen-state done">Fait</a>
+										{% else %}
+											<a href="{{path('exam_state',{'id': examen.id })}}" class="btn table-action examen-state wait">En attente</a>
+										{% endif %}
+									</td>
+									<td><a href="{{path('supp_exam',{'id':examen.id})}}" class="btn table-action">Supprimer</a></td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+
+				</div>
+
+				<h4 class="cadre-title">Étudiants</h4>
+				<button type="button" id="tab_discussion" class="btn btn-cadre"><i class="fa fa-comments"></i>Voir la discussion</button>
+				<button type="button" id="tab_all" class="btn btn-cadre"><i class="fa fa-list"></i>Voir tous les élèves</button>
+				<button type="button" id="tab_groups" class="btn btn-cadre active"><i class="fa fa-th-list"></i>Voir par groupes</button>
+
+				<div class="clearfix"></div>
+
+				<div id="groups_tab_content" class="tab-content active">
+					{% include '@App/section/groupes_show.html.twig' %}
+				</div>
+
+				<div id="all_tab_content" class="tab-content">
+					{% include '@App/section/all_show.html.twig' %}
+				</div>
+
+				<div id="discussion_tab_content" class="tab-content">
+					{% include '@App/section/discussion_show.html.twig' %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}
+
+
+{% block stylesheets %}{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript">
+			sortTable("etudiants");
+
+			sortTable("examens");
+
+			{% for groupe in section.groupes %}
+				sortTable("table_groupe_{{groupe.numero}}");
+			{% endfor %}
+
+
+	        $('.navigation ul li:first-child').removeClass('active');
+	        $('.navigation ul li:nth-child(2)').addClass('active');
+
+	        {% for groupe in section.groupes %}
+	        	$('#btn_groupe_{{groupe.numero}}' ).click(function() {
+	                {% for groupe2 in section.groupes %}
+	                	$('#btn_groupe_{{groupe2.numero}}').removeClass('active');
+	                	$('#groupe_{{groupe2.numero}}').removeClass('active');
+	                {% endfor %}
+	                $('#btn_groupe_{{groupe.numero}}').addClass('active');
+	                $('#groupe_{{groupe.numero}}').addClass('active');
+	            });
+	        {% endfor %}
+
+	        $('#tab_groups' ).click(function() {
+                $('#all_tab_content').removeClass('active');
+                $('#tab_all').removeClass('active');
+
+                $('#tab_discussion').removeClass('active');
+                $('#discussion_tab_content').removeClass('active');
+
+                $('#tab_groups').addClass('active');
+                $('#groups_tab_content').addClass('active');
+            });
+
+            $('#tab_all' ).click(function() {
+                $('#all_tab_content').addClass('active');
+                $('#tab_all').addClass('active');
+                
+                $('#tab_discussion').removeClass('active');
+                $('#discussion_tab_content').removeClass('active');
+
+                $('#tab_groups').removeClass('active');
+                $('#groups_tab_content').removeClass('active');
+            });
+
+            $('#tab_discussion' ).click(function() {
+                $('#all_tab_content').removeClass('active');
+                $('#tab_all').removeClass('active');
+                
+                $('#tab_discussion').addClass('active');
+                $('#discussion_tab_content').addClass('active');
+
+                $('#tab_groups').removeClass('active');
+                $('#groups_tab_content').removeClass('active');
+            });
+
+
+            function sortTable(s) {
+			  var table, rows, switching, i, x, y, shouldSwitch;
+			  table = document.getElementById(s);
+			  switching = true;
+			  /* Make a loop that will continue until
+			  no switching has been done: */
+			  while (switching) {
+			    // Start by saying: no switching is done:
+			    switching = false;
+			    rows = table.getElementsByTagName("TR");
+			    /* Loop through all table rows (except the
+			    first, which contains table headers): */
+			    for (i = 1; i < (rows.length - 1); i++) {
+			      // Start by saying there should be no switching:
+			      shouldSwitch = false;
+			      /* Get the two elements you want to compare,
+			      one from current row and one from the next: */
+			      x = rows[i].getElementsByTagName("TD")[0];
+			      y = rows[i + 1].getElementsByTagName("TD")[0];
+			      // Check if the two rows should switch place:
+			      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+			        // I so, mark as a switch and break the loop:
+			        shouldSwitch= true;
+			        break;
+			      }
+			    }
+			    if (shouldSwitch) {
+			      /* If a switch has been marked, make the switch
+			      and mark that a switch has been done: */
+			      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			      switching = true;
+			    }
+			  }
+			}
+
+	</script>
+{% endblock %}

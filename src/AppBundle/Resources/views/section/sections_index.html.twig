@@ -1,0 +1,108 @@
+{% extends '@App/template/user.html.twig' %}
+{% block title %}Sections{% endblock %}
+
+
+
+{% block body %}
+	{% if not is_granted('ROLE_PROF') %}
+		{% include '@App/user/access_denied.html.twig' %}
+	{% else %}
+
+
+        <div class="content-header">
+			<h3 class="page-title">Gestion des sections</h3>
+
+			<button type="button" id="btn_add_section" class="btn btn-header" data-toggle="modal" data-target="#new_section_modal"><i class="fa fa-plus"></i>Ajouter</button>
+		</div>
+
+		{% include '@App/modals/new_section_modal.html.twig' %}
+
+		<div class="container-fluid sections-container">
+			<div class="header_wrap">
+				<div class="num_rows">
+
+					<div class="fancy-field">
+				        <select class="input"
+				                name="state" 
+				                id="SectionsMaxRows"
+				                required>
+				            <option value="10">10</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+							<option value="5000">Tout montrer</option>
+				        </select>
+			        	<label for="SectionsMaxRows">Nombre de lignes</label>
+				    </div>
+
+				</div>
+				<div class="tb_search">
+					<div class="fancy-field" id="poste_groupe">
+				        <input class="input"
+				               id="sections_search_input_all"
+				               name="poste"
+				               type="text"
+				               onkeyup="FilterkeyWord_sections_table()"
+				               value=""
+				        >
+				        <label for="sections_search_input_all">Recherche</label>
+				    </div>
+				</div>
+			</div>
+			<table class="table table-class" id="sections">
+
+
+				<thead>
+					<tr>
+						<th>Spécialité</th>
+						<th>Année</th>
+						<th>Section</th>
+						<th>Email</th>
+						<th>Module</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for section in sections %}
+						<tr>
+							<td>{{section.specialite.name}}</td>
+							<td>{{section.annee}}</td>
+							<td>{{section.name}}</td>
+							<td>{{section.email}}</td>
+							<td>{{section.module.name}}</td>
+							<td><a href="{{path('section_show', {'id':section.id})}}" class="btn table-action">Voir Plus</a></td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class='pagination-container'>
+				<nav>
+					<ul class="pagination">
+						<!--	Here the JS Function Will Add the Rows -->
+					</ul>
+				</nav>
+			</div>
+			<div class="rows_count">Montrant 11 à 20 de 91 éléments</div>
+
+		</div>
+	{% endif %}
+{% endblock %}
+
+
+{% block stylesheets %}{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript">
+	        $('.navigation ul li:first-child').removeClass('active');
+	        $('.navigation ul li:nth-child(2)').addClass('active');
+
+	        $('#submit_section_substitute').click(function() {
+	        		if($('#new_section_end_date').val() == ''){
+	        			$('#new_section_end_date').attr('type', 'text');
+	        		}
+
+	        		$('#true_section_submit').click();
+            	}
+        	);
+	</script>
+{% endblock %}

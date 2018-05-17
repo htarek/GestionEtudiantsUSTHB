@@ -1,0 +1,47 @@
+<div class="onglets">
+	{% for groupe in section.groupes %}
+	<button type="button" class="btn section-onglet {% if groupe.numero == 1 %}active{% endif %}" id="btn_groupe_{{groupe.numero}}">Groupe {{groupe.numero}}</button>
+	{% endfor %}
+</div>
+
+<div class="container-fluid groupes-container">
+	{% for groupe in section.groupes %}
+		<div class="groupe-wrapper {% if groupe.numero == 1 %}active{% endif %}" id="groupe_{{groupe.numero}}">
+			<table class="table table-class" id="table_groupe_{{groupe.numero}}">
+				<thead>
+					<tr>
+						<th>Photo</th>
+						<th>Nom</th>
+						<th>Prénom</th>
+						<th>Matricule</th>
+						<th>Email</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for etudiant in groupe.etudiants %}
+						<tr>
+							<td><span class="hidden">{{etudiant.user.nom}}</span>
+								{% if etudiant.user.image == NULL %}
+									<img src="{{asset('/assets/public/users/images/defaultuser.png')}}" class="table-image">
+								{% else %}
+									<img src="{{asset('/assets/public/users/images/') ~ etudiant.user.image}}" class="table-image">
+								{% endif %}
+							</td>
+							<td>{{etudiant.user.nom}}</td>
+							<td>{{etudiant.user.prenom}}</td>
+							<td>{{etudiant.matricule}}</td>
+							<td>{{etudiant.user.email}}</td>
+							<td><a href="{{ path('etudiant_show', {'id':etudiant.id})}}" class="btn table-action">Voir plus</a> 
+								{% if etudiant.user.enabled == false %}
+									<a href="" class="btn table-action table-valider">Valider</a> 
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	{% endfor %}
+</div>
+

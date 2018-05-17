@@ -1,0 +1,100 @@
+<div id="new_etudiant_modal" class="modal fade creation-modal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Ajouter un étudiant</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="new_user" action="{{path('etudiant_add')}}" method="POST" autocomplete="off" enctype="multipart/form-data">
+
+                  <div class="fancy-field">
+                    <input class="input" 
+                    id="usernamebis" 
+                    name="_usernamebis" 
+                    type="text"
+                    value="">
+                    <label for="usernamebis">Email</label>
+                  </div>
+
+                  <div class="fancy-field">
+                    <input class="input" 
+                    id="passwordbis"
+                    name="_passwordbis"
+                    type="password">
+                    <label for="passwordbis">Mot de passe</label>
+                  </div>
+
+                  <div class="fancy-field">
+                    <input class="input" 
+                    id="passwordvalidate"
+                    name="_passwordvalidate"
+                    type="password">
+                    <label for="passwordvalidate">Retapez le mot de passe</label>
+                  </div>
+
+                  <div class="fancy-field">
+                    <input class="input" 
+                    id="nom" 
+                    name="nom" 
+                    type="text"
+                    value="">
+                    <label for="nom">Nom</label>
+                  </div>
+
+                  <div class="fancy-field">
+                    <input class="input" 
+                    id="prenom" 
+                    name="prenom" 
+                    type="text"
+                    value="">
+                    <label for="prenom">Prénom</label>
+                  </div>
+
+                  <div class="fancy-field">
+                    <input class="input" 
+                    id="matricule" 
+                    name="matricule" 
+                    type="text"
+                    value="">
+                    <label for="matricule">Matricule</label>
+                  </div>
+
+                  <div class="fancy-field">
+                    <select class="input"
+                    id="groupe"
+                    name="groupe"
+                    required>
+                    <option value="" selected></option>
+                    {% for section in sections %}
+                      {% for groupe in section.groupes %}
+                        <option value="{{ groupe.id }}">{{ section.specialite.name ~ ' Section: ' ~ section.name ~ ': Groupe ' ~ groupe.numero}}</option>
+                      {% endfor %}
+                    {% endfor %}
+                  </select>
+                  <label for="groupe">Choisissez une section et un groupe</label>
+                </div>
+
+                <div class="fancy-field">
+                  <input class="input file-input"
+                  id="new-user-photo"
+                  name="photo"
+                  type="file"
+                  value="">
+                  <label for="new-user-photo">Ajouter une photo</label>
+                </div>
+
+                <div>
+                    <input type="submit" class="btn btn-submit" value="Valider l'ajout">
+                    <div class="clearfix"></div>
+                </div>
+              </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

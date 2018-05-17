@@ -1,0 +1,56 @@
+<div class="object comments">
+    <div class="comments-container">
+        {% if section.messages is empty %}
+            <p class="no-message-found" style="text-align:center">Envoyez un message</p>
+        {% endif %}
+        {% for message in section.messages %}
+            <div class="comment {% if message.etudiant==NULL %}us{% else %}them{% endif %}">
+                <p class="infos-sender">
+                    {% if message.etudiant == NULL %}
+                        {{ prof.nom ~ ' ' ~ prof.prenom }}
+                    {% else %}
+                        {{ message.etudiant.user.nom ~ ' ' ~ message.etudiant.user.prenom }}
+                    {% endif %}
+                    ,
+                    {% if message.createdAt|date('d/m/y')==date()|date('d/m/y') %}
+                        {{ message.createdAt | date('H:i:s', false) }}
+                    {% else %}
+                        {{ message.createdAt | date('d/m/y, H:i:s', false) }}
+                    {% endif %}
+                </p>
+                <div class="comment-content">
+                    {% if message.etudiant == NULL %}
+                        {% if prof.image == NULL %}
+                            <img src="{{ asset('assets/public/users/images/defaultuser.png')}}" class="comment-user-photo">
+                        {% else %}
+                            <img src="{{asset('/assets/public/users/images/') ~ prof.image}}" class="comment-user-photo">
+                        {% endif %}
+                    {% else %}
+                        {% if message.etudiant.user.image == NULL %}
+                            <img src="{{ asset('assets/public/users/images/defaultuser.png')}}" class="comment-user-photo">
+                        {% else %}
+                            <img src="{{asset('/assets/public/users/images/') ~ message.etudiant.user.image}}" class="comment-user-photo">
+                        {% endif %}
+                    {% endif %}
+
+                    <span>{{ message.content }}</span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        {% endfor %}
+    </div>
+    <form id="send_comment" action="{{path('section_add_message',{'id' : section.id})}}" method="POST" autocomplete="off">
+        <div class="fancy-field">
+                <textarea class="input"
+                          id="content"
+                          name="content"
+                          type="text"
+                          value=""></textarea>
+            <label for="content">Votre message</label>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-send-comment"><i class="fa fa-reply"></i></button>
+        </div>
+    </form>
+</div>

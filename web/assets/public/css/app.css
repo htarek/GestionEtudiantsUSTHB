@@ -1,0 +1,653 @@
+.access-denied{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 100px;
+    opacity: 0.3;
+}
+
+
+.home-title{
+	font-weight   : 700;
+	font-size     : 28px;
+	padding-left  : 30px;
+	opacity       : 0.8;
+	margin-bottom : 20px;
+}
+
+.home-container{
+	padding: 0px 60px;
+}
+
+.object{
+	background-color : #fff;
+	border-radius    : 4px;
+	border           : 1px solid #EBEDF8;
+	box-shadow       : 0px 2px 6px rgba(0,0,0,0.04);
+	padding          : 30px;
+}
+
+.home-object-title{
+	font-size     : 14px;
+	opacity       : 0.5;
+	margin-bottom : 20px;
+}
+
+.home-object-value{
+	font-size: 25px;
+}
+
+h3.page-title{
+	color          : #0077FF;
+	text-transform : uppercase;
+	font-size      : 18px;
+	font-weight    : 700;
+	padding-left   : 30px;
+}
+
+.cadre-container{
+	padding: 0px 15px;
+}
+
+.sections-container{
+	margin-bottom: 50px;
+	max-width: 1170px;
+	margin: auto;
+}
+
+.content-header .btn-header{
+    background: transparent;
+    color: #0077FF;
+    overflow-x: hidden;
+    font-size: 12px;
+    text-transform: uppercase;
+    transform: translateY(-3px);
+    transition: 0.3s ease-out;
+    margin-right: 30px;
+    margin-top: -20px;
+    margin-bottom: 10px;
+    float: right;
+}
+
+.content-header .btn-header:hover{
+    background: #0077FF;
+    color: #fff;
+}
+
+.content-header .btn-header i{
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.cadre{
+	border-radius : 4px;
+	border        : 1px solid #EBEDF8;
+	padding       : 40px 30px;
+	max-width     : 1170px;
+	margin        : 10px auto 50px auto;
+}
+
+.cadre .bar{
+	width: 100%;
+	border-bottom: 1px solid #EBEDF8;
+	margin: 30px 0px;
+}
+
+h4.cadre-title{
+	color          : #0077FF;
+	text-transform : uppercase;
+	font-size      : 16px;
+	font-weight    : 700;
+	margin-top     : 40px;
+}
+
+.btn-cadre{
+    background: transparent;
+    color: #0077FF;
+    overflow-x: hidden;
+    font-size: 11px;
+    text-transform: uppercase;
+    transform: translateY(-3px);
+    transition: 0.3s ease-out;
+    margin-right: 30px;
+    margin-top: -20px;
+    margin-bottom: 10px;
+    float: right;
+}
+
+.btn-cadre.active{
+    background: #0077FF;
+    color: #fff;
+}
+
+.btn-cadre:hover{
+    background: #0077FF;
+    color: #fff;
+}
+
+.btn-cadre i{
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.cadre .onglets{
+	padding-top: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+
+.section-onglet{
+	display: inline-block;
+	margin: 0px 5px;
+	background: transparent;
+    color: #0077FF;
+    overflow-x: hidden;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transform: translateY(-3px);
+    transition: 0.3s ease-out;
+}
+
+.section-onglet.active{
+    background: #0077FF;
+    color: #fff;
+}
+
+.section-onglet:hover{
+    background: #0077FF;
+    color: #fff;
+}
+
+.section-onglet i{
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+
+
+@media screen and (max-width: 1200px)
+{
+	.home-container{
+		padding: 0px 30px;
+	}
+
+	.content-header .btn-header{
+	    margin-top: 0px;
+	}
+}
+
+
+@media screen and (max-width: 992px)
+{
+	
+}
+
+
+@media screen and (max-width: 768px)
+{
+	.home-container{
+		padding: 0px 0px;
+	}
+
+	.cadre{
+		margin        : 10px 0px 50px 0px;
+	}
+
+	.cadre-container{
+		padding: 0px;
+	}
+}
+
+@media screen and (max-width: 576px)
+{
+	
+}
+
+
+/*********************************************SECTION SHOW*************************************/
+.specialite-section{
+	font-size: 26px;
+	font-weight: 700;
+}
+
+.details-section{
+	font-size: 15px;
+}
+
+.module{
+	font-size: 17px;
+}
+
+.endDate{
+	float: right;
+	font-size: 13px;
+}
+
+.examens-container{
+	margin-bottom: 50px;
+	max-width: 980px;
+	margin: auto;
+}
+
+.examen-state.done{
+	background-color: #1CD90F;
+}
+
+.examen-state.done:hover{
+	background-color: #1CB80E;
+}
+
+.examen-state.wait{
+	background-color: #999;
+}
+
+.examen-state.wait:hover{
+	background-color: #777;
+}
+
+.groupes-container{
+	padding-bottom: 50px;
+	max-width: 1170px;
+	margin: auto;
+}
+
+.groupe-wrapper{
+	display: none;
+}
+
+
+.groupe-wrapper.active{
+	display: block;
+}
+
+.tab-content{
+	display: none;
+}
+
+.tab-content.active{
+	display: block;
+}
+
+
+
+/*********************************************ETUDIANTS INDEX*************************************/
+
+.table-etudiants tr td:last-child{
+	min-width: 80px;
+}
+
+
+/*********************************************ETUDIANTS SHOW*************************************/
+
+.student-photo{
+	display: block;
+	float: left;
+	width: 160px;
+	height: 200px;
+	object-fit: cover;
+	margin-right: 15px;
+}
+
+.pseudo-table-infos{
+	width: 40%;
+	min-width: 450px;
+	float: right;
+}
+
+.pseudo-table-infos .pseudo-table-infos-title{
+	padding: 5px 0px;
+	font-size: 16px;
+	text-transform: uppercase;
+	font-weight: 700;
+	border-bottom: 1px solid #0077FF;
+}
+
+.notes-container{
+	padding-top: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+}
+
+.note-object{
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.note-object .note-title{
+	padding: 8px;
+	background-color: #0077FF;
+	color: #fff;
+	font-size: 15px;
+	margin-bottom: 15px;
+}
+
+.note-object span{
+	font-size: 16px;
+	color: #000;
+}
+
+.btn-valider{
+	color: red !important;
+}
+
+.btn-valider:hover{
+	color: #fff !important;
+	background-color: red !important;
+}
+
+
+/*******************************************SETTINGS**********************************************/
+
+.settings-image{
+	display: block;
+	margin: auto;
+	width: 32%;
+	min-width: 220px;
+	max-width: 320px;
+	height: 320px;
+	object-fit: cover;
+	margin-bottom: 50px;
+}
+
+#settings{
+	max-width: 780px;
+	margin: auto;
+}
+
+
+
+/*******************************************MES NOTRES**********************************************/
+
+.my-note_object{
+	background-color: #0077FF;
+	height: 100px;
+	overflow: hidden;
+	border-radius: 8px;
+	box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.my-note-name{
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	color: #fff;
+	font-size: 14px;
+}
+
+.note-obtained{
+	position: absolute;
+	bottom: 0px;
+	right: 30px;
+	color: #fff;
+	font-size: 50px;
+	vertical-align: text-bottom;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+.note-obtained span{
+	font-size: 15px;
+	opacity: 0.32;
+}
+
+.my-moyenne_object{
+	background-color: #1CD90F;
+	height: 100px;
+	overflow: hidden;
+	border-radius: 8px;
+	box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+	position: relative;
+	max-width: 255px;
+	margin: auto;
+}
+
+
+
+/*****************************************MON ENSEIGNANT**********************************************/
+
+
+/*******************************************COMMENTS**********************************************/
+.comments{
+    padding: 50px 15px 60px 15px;
+}
+
+.comments-container{
+    padding: 0px 5px;
+    max-width: 770px;
+    margin: auto;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.comment{
+    margin-bottom: 15px;
+}
+
+.comment.us{
+    float: right;
+}
+
+.comment .infos-sender{
+    color: #9095A4;
+    font-size: 11px;
+}
+
+.comment .comment-content{
+    display: inline-block;
+    padding: 4px;
+    border-radius: 22px;
+}
+
+.comment.them .comment-content{
+    background-color: #F5F5F5;
+    padding-left: 25px;
+}
+
+.comment.us .comment-content{
+    float: right;
+    background-color: #0077FF;
+    padding-right: 25px;
+}
+
+.comment .comment-content .comment-user-photo{
+    width:36px;
+    height:36px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.comment.them .comment-content .comment-user-photo{
+    margin-left: 15px;
+    float: right;
+}
+
+.comment.us .comment-content .comment-user-photo{
+    float: left;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.comment .comment-content span{
+    font-weight: 500;
+    max-width: 400px;
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+.comment.them .comment-content span{
+    padding-top: 5px;
+    color: #9095A4;
+}
+
+.comment.us .comment-content span{
+    color: #fff;
+}
+
+#send_comment{
+    max-width: 800px;
+    margin: 20px auto 0px auto;
+}
+
+.btn-send-comment{
+    float: right;
+    position: relative;
+    top: -45px;
+    background: transparent;
+    color: #B6B9C3;
+}
+
+.btn-send-comment:hover{
+    color: #0077FF;
+}
+
+.no-message-found{
+    font-size:20px;
+    font-weight:700;
+    opacity:0.2;
+    padding-left: 20px;
+}
+
+
+
+/********************************************MODALS***********************************************/
+
+.modal-dialog {
+    max-width: 950px;
+    width: 95%;
+    margin: 60px auto;
+}
+
+.modal-dialog .modal-content{
+    border: none;
+    border-radius: 2px;
+}
+
+.modal-dialog .modal-header {
+    padding: 30px;
+    border-bottom: none;
+}
+
+.modal-dialog .modal-header h4{
+    color: #0077FF;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.modal-dialog .modal-content form {
+    padding: 0px 30px;
+    margin: auto;
+    max-width: 700px;
+}
+
+
+
+/********************************************TABLES***********************************************/
+
+table{
+	margin  : 30px auto !important;
+	vertical-align : center !important;
+}
+
+
+table th , table td{
+    text-align  : left;
+    padding     : 15px 0px !important;
+}
+
+th {
+	font-weight      : 400;
+	font-size        : 10px;
+	text-transform   : uppercase;
+	background       : #fff;
+	color            : #B4BAC6;
+}
+
+td{
+	font-weight    : 400;
+	color          : #8A96A0;
+	border-top     : 1px solid #eee !important;
+	vertical-align : center !important;
+}
+
+table tr td:first-child{
+	font-weight : 700;
+	color       : #000;
+}
+
+table tr td:last-child{
+    max-width: 65px;
+}
+
+.pagination {
+  margin             : 0;
+}
+
+.pagination li:hover{
+    cursor           : pointer;
+}
+
+.header_wrap {
+  padding            :30px 0;
+}
+.num_rows {
+  width              : 20%;
+  float              :left;
+}
+.tb_search{
+  width              : 20%;
+  float              :right;
+}
+.pagination-container {
+  width              : 70%;
+  float              :left;
+}
+
+.rows_count {
+  width              : 20%;
+  float              :right;
+  text-align         :right;
+  color              : #999;
+}
+
+.table-action{
+	border-radius    : 4px;
+	background-color : #0077FF;
+	font-size        : 11px;
+	color            : #fff;
+	text-transform   : uppercase;
+	font-weight      : 700;
+	transition       : 0.3s ease-out;
+}
+
+.table-action:hover{
+	background-color : #00FF;
+	color            : #fff;
+}
+
+.table-valider{
+	background-color: #FF0000;
+}
+
+.table-valider:hover{
+	background-color: #BB0000;
+}
+
+.table-image{
+	object-fit: cover;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+}
+
+@media screen and (max-width: 992px)
+{
+	.tb_search{
+	  width              : 40%;	}
+}

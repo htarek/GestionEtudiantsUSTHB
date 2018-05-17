@@ -1,0 +1,103 @@
+<div id="new_section_modal" class="modal fade creation-modal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Ajouter une section</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="new_user" action="{{path('section_add')}}" method="POST" autocomplete="off">
+                    <div class="fancy-field">
+                        <select class="input"
+                                id="new_section_specialite"
+                                name="specialite"
+                                required>
+                            <option value="" selected></option>
+                            {% for specialite in specialites %}
+                                <option value="{{specialite.id}}">{{specialite.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="new_section_specialite">Spécialité</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new_section_year"
+                               name="annee"
+                               type="text"
+                               value=""
+                               required>
+                        <label for="new_section_year">Année universitaire</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new_section_name"
+                               name="name"
+                               type="text"
+                               value=""
+                               required>
+                        <label for="new_section_name">Nom de la section</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new_section_nbr_groupes"
+                               name="groupes"
+                               type="number"
+                               value=""
+                               required>
+                        <label for="new_section_nbr_groupes">Nombre de groupes</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new_section_email"
+                               name="email"
+                               type="email"
+                               value=""
+                               required>
+                        <label for="new_section_email">Email de la section</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <select class="input"
+                                id="new_section_module"
+                                name="module"
+                                required>
+                            <option value="" selected></option>
+                            {% for module in modules %}
+                                <option value="{{module.id}}">{{module.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="new_section_module">Module enseigné</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new_section_end_date"
+                               name="end_date"
+                               type="date"
+                               value="">
+                        <label for="new_section_email">Date de supression automatique (facultatif)</label>
+                    </div>
+
+                    <div>
+                        <button type="button" id="submit_section_substitute" class="btn btn-submit">Valider l'ajout</button>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div>
+                        <input type="submit" class="btn btn-submit hidden" id="true_section_submit" value="Valider l'ajout">
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

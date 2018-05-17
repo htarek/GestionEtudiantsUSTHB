@@ -1,0 +1,75 @@
+<div id="edit_moyenne_modal" class="modal fade creation-modal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Définir le calcul de moyenne de la section {{section.name}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="new_user" action="{{path('exams_edit',{'id':section.id})}}" method="POST" autocomplete="off">
+                    <table class="table">
+                        {% for examen in section.examens %}
+                            <tr>
+                                <td style="border-top: none !important; width: 30%; padding-right: 10px !important;">
+                                    <div class="fancy-field">
+                                        <input class="input"
+                                               id="edit-examen-coeff-{{examen.id}}"
+                                               name="coeff-{{examen.id}}"
+                                               type="number"
+                                               {% if examen.coefficient!=NULL %}value="{{examen.coefficient}}"{% endif %}
+                                               required>
+                                        <label for="edit-examen-coeff-{{examen.id}}">Coefficient</label>
+                                    </div>
+                                </td>
+
+                                <td style="border-top: none !important; width: 30%; padding-right: 10px !important;">
+                                    <div class="fancy-field">
+                                        <input class="input"
+                                               id="edit-examen-note-{{examen.id}}"
+                                               name="note-{{examen.id}}"
+                                               type="number"
+                                               value="{{examen.note}}"
+                                               required>
+                                        <label for="edit-examen-note-{{examen.id}}">Note</label>
+                                    </div>
+                                </td>
+
+                                <td style="border-top: none !important; width: 30%">
+                                    <div class="fancy-field">
+                                        <input class="input"
+                                               id="edit-examen-name-{{examen.id}}"
+                                               name="name-{{examen.id}}"
+                                               type="text"
+                                               value="{{examen.name}}">
+                                        <label for="edit-examen-name-{{examen.id}}">Nom examen</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="sommeCoeffs"
+                               name="sommeCoeffs"
+                               type="number"
+                               {% if section.sommeCoeffs != null %}
+                                  value="{{section.sommeCoeffs}}"
+                                {% endif %}>
+                        <label for="sommeCoeffs">Diviser le tout sur</label>
+                    </div>
+
+                    <div>
+                        <input type="submit" class="btn btn-submit" value="Valider">
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

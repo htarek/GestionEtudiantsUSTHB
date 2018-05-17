@@ -1,0 +1,73 @@
+<div id="new_exam_modal" class="modal fade creation-modal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Ajouter un Examen</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="new_examen" action="{{path('examen_add',{'id':section.id})}}" method="POST" autocomplete="off">
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new-exam-name"
+                               name="name"
+                               type="text"
+                               value=""
+                               required>
+                        <label for="new-exam-name">Nom de l'examen</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <textarea class="input"
+                               id="new-exam-description"
+                               name="description"
+                               type="text"
+                               required></textarea>
+                        <label for="new-exam-description">Description de l'examen</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new-exam-note"
+                               name="note"
+                               type="number"
+                               value=""
+                               required>
+                        <label for="new-exam-note">Note de l'examen</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <input class="input"
+                               id="new-exam-date"
+                               name="date"
+                               type="date"
+                               value="">
+                        <label for="new-exam-date">Date de l'examen</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <select class="input"
+                                id="new-exam-etat"
+                                name="etat"
+                                required>
+                            <option value="" selected></option>
+                            <option value="0">En attente</option>
+                            <option value="1">Fait</option>
+                        </select>
+                        <label for="new-exam-etat">État</label>
+                    </div>
+
+                    <div>
+                        <input type="submit" class="btn btn-submit" value="Ajouter">
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,66 @@
+{% extends '@App/template/user.html.twig' %}
+{% block title %}Accueil{% endblock %}
+
+
+
+{% block body %}
+	{% if not is_granted('ROLE_ETUDIANT') %}
+		{% include '@App/user/access_denied.html.twig' %}
+	{% elseif eleve.user.enabled == false %}
+		{% include '@App/user/attente_validation.html.twig' %}
+	{% else %}
+		{% if eleve.groupe != null %}{% if eleve.groupe.section != null %}
+			<div class="content-header">
+				<h3 class="page-title">Mes notes</h3>
+			</div>
+
+			<div class="container-fluid cadre-container">
+				<div class="cadre">
+					<div class="row">
+						{% for examen in eleve.groupe.section.examens %}
+							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+								<div class="my-note_object">
+									<p class="my-note-name">{{examen.name}}</p>
+									{% set found = false %}
+										{% for note in eleve.notes %}
+											{% if note.examen==examen and note.note !=null %}
+												{% set found = true %}
+												<p class="note-obtained">{{note.note}}<span>/{{examen.note}}</span></p>
+											{% endif %}
+										{% endfor %}
+									{% if found == false %}
+										<p class="note-obtained">-<span style="margin-left: 10px;">/{{examen.note}}</span></p>
+									{% endif %}
+								</div>
+							</div>
+						{% endfor %}
+
+						<div class="col-xs-12">
+								<div class="my-moyenne_object">
+									<p class="my-note-name">Moyenne</p>
+									<p class="note-obtained">{% if eleve.moyenne == -1 %}-<span style="margin-left: 10px;">{% else %}{{eleve.moyenne}}<span>{% endif %}/20</span></p>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+			{% else %}
+			<p class="access-denied">Vous n'êtes affecté à aucune section, contactez votre professeur pour plus de details</p>
+			{% endif %}
+		{% else %}
+			<p class="access-denied">Vous n'êtes affecté à aucune section, contactez votre professeur pour plus de details</p>
+		{% endif %}
+	{% endif %}
+
+
+{% endblock %}
+
+
+{% block stylesheets %}{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript">
+		$('.navigation ul li:first-child').removeClass('active');
+	    $('.navigation ul li:nth-child(2)').addClass('active');
+	</script>
+{% endblock %}

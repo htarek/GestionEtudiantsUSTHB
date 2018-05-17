@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+
+
+
+
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+          <link rel="stylesheet" type="text/css" href="{{asset('assets/public/css/forms.css')}}">
+          <link rel="stylesheet" type="text/css" href="{{asset('assets/public/css/login.css')}}">
+
+
+
+
+
+
+        <title>Gestion Étudiants</title>
+        <link rel="icon" href="{{asset('assets/public/images/favicon.png')}}">
+    </head>
+
+    <body>
+        <div class="container-general">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="left-side col-xs-12 col-sm-12 col-md-6">
+                        <h1><span>BIENVENUE À<br/></span> LA PLATEFORME DE GESTION ÉTUDIANTS</h1>
+                    </div>
+                    <div class="right-side col-xs-12 col-sm-12 col-md-6">
+                        <div class="form-container">
+                            <div class="form-tabs">
+                                <span id="login-btn" class="btn login-btn active" onclick="selectLogin();">Se connecter</span>
+                                <span id="signup-btn" class="btn login-btn" onclick="selectSignup();">S'inscrire</span>
+                            </div>
+                            <div class="form-tabs-underline"></div>
+                            <div class="forms-wrapper">
+                                <div class="form-wrapper login-form active">
+
+
+                                    {% if error is defined %}
+                                      <p style = "color : red">{{error}}</p>
+                                      {% endif %}
+                                          {% if succes is defined %}
+                                      <p style = "color : Lime">{{succes}}</p>
+                                      {% endif %}
+
+                                    <form id="connexion" action="{{path('login')}}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                                        <div class="fancy-field">
+                                            <input class="input" 
+                                                   id="username" 
+                                                   name="_username" 
+                                                   type="text"
+                                                   value="">
+                                            <label for="username">Email</label>
+                                        </div>
+
+                                        <div class="fancy-field">
+                                            <input class="input" 
+                                                   id="password"
+                                                   name="_password"
+                                                   type="password">
+                                            <label for="password">Mot de passe</label>
+                                        </div>
+
+                                        <div class="sub clearfix">
+                                            <label>
+                                                <input class="checkbox" type="checkbox" name="remember" value="1" >
+                                                <div>
+                                                    <span class="icon unchecked mdi mdi-checkbox-blank-outline"></span>
+                                                    <span class="icon checked mdi mdi-checkbox-marked"></span>
+                                                    Se souvenir de moi
+                                                </div>
+                                            </label>
+
+                                            <a href="{{ path('fos_user_resetting_request') }}" class="forgot pull-right">Mot de passe oublié?</a>
+                                        </div>
+
+                                        <div>
+                                            <input type="submit" class="btn submit_btn" value="Se connecter">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="form-wrapper inscription-form">
+                                      {% if error_new is defined %}
+                                      <p style = "color : red">{{error_new}}</p>
+                                      {% endif %}
+                                  
+
+                                    <form id="inscription" action="{{path('login')}}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                                        <div class="fancy-field">
+                                            <input class="input" 
+                                                   id="usernamebis" 
+                                                   name="_usernamebis" 
+                                                   type="text"
+                                                   value="">
+                                            <label for="usernamebis">Email</label>
+                                        </div>
+
+                                        <div class="fancy-field">
+                                            <input class="input" 
+                                                   id="passwordbis"
+                                                   name="_passwordbis"
+                                                   type="password">
+                                            <label for="passwordbis">Mot de passe</label>
+                                        </div>
+
+                                        <div class="fancy-field">
+                                            <input class="input" 
+                                                   id="passwordvalidate"
+                                                   name="_passwordvalidate"
+                                                   type="password">
+                                            <label for="passwordvalidate">Retapez le mot de passe</label>
+                                        </div>
+
+                                        <div class="fancy-field">
+                                            <input class="input" 
+                                                   id="nom" 
+                                                   name="nom" 
+                                                   type="text"
+                                                   value="">
+                                            <label for="nom">Nom</label>
+                                        </div>
+
+                                        <div class="fancy-field">
+                                            <input class="input" 
+                                                   id="prenom" 
+                                                   name="prenom" 
+                                                   type="text"
+                                                   value="">
+                                            <label for="prenom">Prénom</label>
+                                        </div>
+
+                                        <div class="fancy-field">
+                                            <input class="input" 
+                                                   id="matricule" 
+                                                   name="matricule" 
+                                                   type="text"
+                                                   value="">
+                                            <label for="matricule">Matricule</label>
+                                        </div>
+
+                                        <div class="fancy-field">
+                                            <select class="input"
+                                                    id="groupe"
+                                                    name="groupe"
+                                                    required>
+                                                <option value="" selected></option>
+                                                {% for section in sections %}
+                                                    {% for groupe in section.groupes %}
+                                                        <option value="{{ groupe.id }}">{{ section.specialite.name ~ ' Section: ' ~ section.name ~ ': Groupe ' ~ groupe.numero}}</option>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </select>
+                                            <label for="groupe">Choisissez une section et un groupe</label>
+                                        </div>
+
+                                        <div class="fancy-field">
+                                            <input class="input file-input"
+                                                   id="new-user-photo"
+                                                   name="photo"
+                                                   type="file"
+                                                   value="">
+                                            <label for="new-user-photo">Ajouter une photo</label>
+                                        </div>
+
+                                        <div>
+                                            <input type="submit" class="btn submit_btn" value="S'inscrire">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="copyright">Projet par HIOUANI Tarek et BOUHADJAR Mohamed El Amine.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+<img class='usthb-logo' src="{{asset('assets/public/images/usthb.png')}}" />
+
+        <footer id="footer">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+              <script src="{{asset('assets/public/js/login.js')}}"></script>
+                                     {% if error_new is defined %}
+                                      <script>selectSignup();</script>
+                                      {% endif %}
+              
+
+
+        </footer>
+    </body>
+</html>

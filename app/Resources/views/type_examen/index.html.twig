@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Type_examens list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Note</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_examan in type_examens %}
+            <tr>
+                <td><a href="{{ path('Type_examen_show', { 'id': type_examan.id }) }}">{{ type_examan.id }}</a></td>
+                <td>{{ type_examan.name }}</td>
+                <td>{{ type_examan.note }}</td>
+                <td>{{ type_examan.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('Type_examen_show', { 'id': type_examan.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('Type_examen_edit', { 'id': type_examan.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('Type_examen_new') }}">Create a new type_examan</a>
+        </li>
+    </ul>
+{% endblock %}

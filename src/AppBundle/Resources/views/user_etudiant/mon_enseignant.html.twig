@@ -1,0 +1,107 @@
+{% extends '@App/template/user.html.twig' %}
+{% block title %}Accueil{% endblock %}
+
+
+
+{% block body %}
+	{% if not is_granted('ROLE_ETUDIANT') %}
+		{% include '@App/user/access_denied.html.twig' %}
+	{% elseif eleve.user.enabled == false %}
+		{% include '@App/user/attente_validation.html.twig' %}
+	{% else %}
+
+		<div class="content-header">
+			<h3 class="page-title">Mon enseignant</h3>
+		</div>
+
+		<div class="container-fluid cadre-container">
+			<div class="cadre">
+				{% if prof.image == NULL %}
+					<img src="{{asset('/assets/public/users/images/defaultuser.png')}}" class="student-photo">
+				{% else %}
+					<img src="{{asset('/assets/public/users/images/') ~ prof.image}}" class="student-photo">
+				{% endif %}
+				<div class="pull-left">
+					<h5 class="specialite-section">{{prof.nom ~ ' ' ~ prof.prenom }}</h5>
+					{% if eleve.groupe != null %}{% if eleve.groupe.section != null %}
+						<p class="details-section">{{eleve.groupe.section.module.name}}<br /><br />{{prof.email}}</p>
+					{% endif %}{% endif %}
+				</div>
+
+				<div class="clearfix"></div>
+
+				<h4 class="cadre-title">Discussion avec le professeur</h4>
+
+				<div class="object comments">
+				    <div class="comments-container">
+				        {% if eleve.messages is empty %}
+				            <p class="no-message-found" style="text-align:center">Envoyez un message</p>
+				        {% endif %}
+				        {% for message in eleve.messages %}
+				            <div class="comment {% if message.receptor == false %}us{% else %}them{% endif %}">
+				                <p class="infos-sender">
+				                    {% if message.receptor == true %}
+				                        {{ prof.nom ~ ' ' ~ prof.prenom }}
+				                    {% else %}
+				                        {{ eleve.user.nom ~ ' ' ~ eleve.user.prenom }}
+				                    {% endif %}
+				                    ,
+				                    {% if message.createdAt|date('d/m/Y')==date()|date('d/m/Y') %}
+				                        {{ message.createdAt | date('H:i:s', false) }}
+				                    {% else %}
+				                        {{ message.createdAt | date('d/m/Y, H:i:s', false) }}
+				                    {% endif %}
+				                </p>
+				                <div class="comment-content">
+				                    {% if message.receptor == false %}
+				                        {% if prof.image == NULL %}
+				                            <img src="{{ asset('assets/public/users/images/defaultuser.png')}}" class="comment-user-photo">
+				                        {% else %}
+				                            <img src="{{asset('/assets/public/users/images/') ~ prof.image}}" class="comment-user-photo">
+				                        {% endif %}
+				                    {% else %}
+				                        {% if eleve.user.image == NULL %}
+				                            <img src="{{ asset('assets/public/users/images/defaultuser.png')}}" class="comment-user-photo">
+				                        {% else %}
+				                            <img src="{{asset('/assets/public/users/images/') ~ eleve.user.image}}" class="comment-user-photo">
+				                        {% endif %}
+				                    {% endif %}
+
+				                    <span>{{ message.content }}</span>
+				                </div>
+				            </div>
+				            <div class="clearfix"></div>
+				        {% endfor %}
+				    </div>
+				    <form id="send_comment" action="" method="POST" autocomplete="off">
+				        <div class="fancy-field">
+				                <textarea class="input"
+				                          id="content"
+				                          name="content"
+				                          type="text"
+				                          value=""></textarea>
+				            <label for="content">Votre message</label>
+				        </div>
+
+				        <div>
+				            <button type="submit" class="btn btn-send-comment"><i class="fa fa-reply"></i></button>
+				        </div>
+				    </form>
+				</div>
+			</div>
+		</div>
+
+	{% endif %}
+
+
+{% endblock %}
+
+
+{% block stylesheets %}{% endblock %}
+
+{% block scripts %}
+	<script type="text/javascript">
+		$('.navigation ul li:first-child').removeClass('active');
+	    $('.navigation ul li:nth-child(3)').addClass('active');
+	</script>
+{% endblock %}

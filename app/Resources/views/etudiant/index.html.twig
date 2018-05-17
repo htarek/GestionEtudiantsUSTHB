@@ -1,0 +1,39 @@
+{% extends 'templates/admin/template.html.twig' %}
+
+{% block body %}
+    <h1>Etudiants list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Matricule</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for etudiant in etudiants %}
+            <tr>
+                <td><a href="{{ path('Etudiant_show', { 'id': etudiant.id }) }}">{{ etudiant.id }}</a></td>
+                <td>{{ etudiant.matricule }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('Etudiant_show', { 'id': etudiant.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('Etudiant_edit', { 'id': etudiant.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('Etudiant_new') }}">Create a new etudiant</a>
+        </li>
+    </ul>
+{% endblock %}

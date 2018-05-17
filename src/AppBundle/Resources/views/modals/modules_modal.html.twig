@@ -1,0 +1,45 @@
+<div id="modules_modal" class="modal fade creation-modal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Ajouter un module</h4>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-class" id="modules" style="max-width: 500px; margin: auto;">
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for module in modules %}
+                            <tr>
+                                <td>{{module.name}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <form id="add_module" action="{{path('module_add')}}" method="POST" autocomplete="off">
+                    <div class="fancy-field">
+                            <textarea class="input"
+                                      id="moduleName"
+                                      name="name"
+                                      type="text"
+                                      value=""></textarea>
+                        <label for="moduleName">Nom du module</label>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-send-comment"><i class="fa fa-plus"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

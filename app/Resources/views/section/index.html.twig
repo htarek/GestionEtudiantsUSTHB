@@ -1,0 +1,45 @@
+{% extends 'templates/admin/template.html.twig' %}
+
+{% block body %}
+    <h1>Sections list</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Annee</th>
+                <th>Email</th>
+                <th>Datefin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for section in sections %}
+            <tr>
+                <td><a href="{{ path('Section_show', { 'id': section.id }) }}">{{ section.id }}</a></td>
+                <td>{{ section.name }}</td>
+                <td>{{ section.annee }}</td>
+                <td>{{ section.email }}</td>
+                <td>{% if section.dateFin %}<span data-date='{{ section.dateFin|date('Y-m-d') }}' id="moment"></span>{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('Section_show', { 'id': section.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('Section_edit', { 'id': section.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('Section_new') }}">Create a new section</a>
+        </li>
+    </ul>
+{% endblock %}

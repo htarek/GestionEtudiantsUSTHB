@@ -1,0 +1,57 @@
+<div id="new_eleve_modal" class="modal fade creation-modal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Ajouter un élève à la section {{section.name}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="new_user" action="{{path('section_add_etudiant',{'id':section.id})}}" method="POST" autocomplete="off">
+                    <div class="fancy-field">
+                        <select class="input"
+                                id="add_eleve"
+                                name="eleve"
+                                required>
+                            <option value="" selected></option>
+                            {% for eleve in eleves %}
+                                {% if eleve.groupe == null %}
+                                    <option value="{{eleve.id}}">{{eleve.user.nom ~ ' ' ~ eleve.user.prenom}}</option>
+                                {% endif %}
+                                {% if eleve.groupe != null %}{% if eleve.groupe.section != null %}
+                                    {% if eleve.groupe.section != section %}
+                                        <option value="{{eleve.id}}">{{eleve.user.nom ~ ' ' ~ eleve.user.prenom}}</option>
+                                    {% endif %}
+                                {% endif %}{% endif %}
+
+                            {% endfor %}
+                        </select>
+                        <label for="add_eleve">Eleves</label>
+                    </div>
+
+                    <div class="fancy-field">
+                        <select class="input"
+                                id="add_eleve_groupe"
+                                name="groupe"
+                                required>
+                            <option value="" selected></option>
+                            {% for groupe in section.groupes %}
+                                  <option value="{{ groupe.id }}">{{ section.specialite.name ~ ' Section: ' ~ section.name ~ ': Groupe ' ~ groupe.numero}}</option>                                
+                            {% endfor %}
+                        </select>
+                        <label for="add_eleve_groupe">Groupes</label>
+                    </div>
+
+                    <div>
+                        <input type="submit" class="btn btn-submit" value="Ajouter">
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

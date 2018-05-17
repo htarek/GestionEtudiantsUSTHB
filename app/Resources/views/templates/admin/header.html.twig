@@ -1,0 +1,90 @@
+<header class="header">
+    <a href="/" class="logo">
+        <img src="{{ asset('/assets/images/template/logo__vitalion.png') }}" alt="Logo">
+    </a>
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <div>
+            <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                <div class="responsive_nav"></div>
+            </a>
+        </div>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <li class="dropdown messages-menu" style="display:none;">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="livicon" data-name="message-flag" data-loop="true" data-color="#42aaca" data-hovercolor="#42aaca" data-size="28"></i>
+                        <span class="label label-success">4</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages pull-right">
+                        <li class="dropdown-title">4 New Messages</li>
+                        <li class="footer">
+                            <a href="#">View all</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown notifications-menu" style="display:none;">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="livicon" data-name="bell" data-loop="true" data-color="#e9573f" data-hovercolor="#e9573f" data-size="28"></i>
+                        <span class="label label-warning">7</span>
+                    </a>
+                    <ul class=" notifications dropdown-menu">
+                        <li class="dropdown-title">You have 7 notifications</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                            </ul>
+                        </li>
+                        <li class="footer">
+                            <a href="#">View all</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="{{ asset('assets/admin/img/avatar_2.jpg') }}" width="35" class="img-circle img-responsive pull-left" height="35" alt="riot">
+                        <div class="riot">
+                            <div>
+                                {{ app.user.username }}
+                                <span>
+                                    <i class="caret" style="display:none"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header bg-light-blue">
+                            <img src="{{ asset('assets/admin/img/avatar_2.jpg') }}" width="90" class="img-circle img-responsive" height="90" alt="User Image" />
+                            <p class="topprofiletext">{{ app.user.username }}</p>
+                        </li>
+                        <!-- Menu Body -->
+                        <li>
+                            <a href="view_user.html">
+                                <i class="livicon" data-name="user" data-s="18"></i> My Profile
+                            </a>
+                        </li>
+                        <li role="presentation"></li>
+                        <li>
+                            <a href="adduser.html">
+                                <i class="livicon" data-name="gears" data-s="18"></i> Account Settings
+                            </a>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="lockscreen.html">
+                                    <i class="livicon" data-name="lock" data-s="18"></i> Lock
+                                </a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="{{ path('fos_user_security_logout') }}">
+                                    <i class="livicon" data-name="sign-out" data-s="18"></i> Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

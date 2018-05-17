@@ -1,0 +1,41 @@
+<div id="noter_etudiant_modal" class="modal fade creation-modal">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Noter l'élève {{etudiant.user.nom ~ ' ' ~ etudiant.user.prenom}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="noter_etudiant" action="{{path('add_notes',{'id':etudiant.id})}}" method="POST" autocomplete="off">
+                    {% if etudiant.groupe != null %}{% if etudiant.groupe.section != null %}
+                      {% for examen in etudiant.groupe.section.examens %}
+                        <div class="fancy-field">
+                          <input class="input"
+                                   step = "0.25";
+                                   id="exam-{{examen.id}}"
+                                   name="exam-{{examen.id}}"
+                                   type="number"
+                                   {% for note in etudiant.notes %}
+                                      {% if note.examen==examen and note.note !=null %}
+                                        value="{{note.note}}"
+                                      {% endif %}
+                                    {% endfor %}
+                                   required>
+                            <label for="exam-{{examen.id}}">{{examen.name}}</label>
+                        </div>
+                      {% endfor %}
+                    {% endif %}{% endif %}
+                    <div>
+                        <input type="submit" class="btn btn-submit" value="Valider">
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
